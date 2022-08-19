@@ -1,0 +1,503 @@
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:sch="http://ws.web.mec.sep.mx/schemas" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://ws.web.mec.sep.mx/schemas" targetNamespace="http://ws.web.mec.sep.mx/schemas">
+<wsdl:types>
+<xs:schema xmlns:min="http://ws.web.mec.sep.mx/schemas/beans" xmlns:ws="http://ws.web.mec.sep.mx/schemas" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://ws.web.mec.sep.mx/schemas">
+<xs:complexType name="autenticacionType">
+<xs:sequence>
+<xs:element name="usuario" type="xs:string"/>
+<xs:element name="password" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="listaType">
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="elemento">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="id" type="xs:int"/>
+<xs:element name="valor" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+<xs:element name="cargaCertificadosRequest">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="nombreArchivo">
+<xs:simpleType>
+<xs:restriction base="xs:string">
+<xs:minLength value="2"/>
+<xs:maxLength value="100"/>
+</xs:restriction>
+</xs:simpleType>
+</xs:element>
+<xs:element name="archivoBase64" type="xs:base64Binary"/>
+<xs:element name="idMotivoAlta" type="xs:integer"/>
+<xs:element name="autenticacion" type="ws:autenticacionType"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="consultaCertificadosRequest">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="numeroLote" type="xs:integer"/>
+<xs:element name="autenticacion" type="ws:autenticacionType"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="descargaCertificadosRequest">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="numeroLote" type="xs:integer"/>
+<xs:element name="autenticacion" type="ws:autenticacionType"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="cancelarCertificadosRequest">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="folioCertificado" type="xs:string"/>
+<xs:element name="idMotivoCancelacion" type="xs:integer"/>
+<xs:element name="autenticacion" type="ws:autenticacionType"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="cancelarLoteCertificadosRequest">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="numeroLote" type="xs:integer"/>
+<xs:element name="idMotivoCancelacion" type="xs:integer"/>
+<xs:element name="autenticacion" type="ws:autenticacionType"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="cargaCertificadosResponse">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="numeroLote" type="xs:integer"/>
+<xs:element name="mensaje" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="consultaCertificadosResponse">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="numeroLote" type="xs:integer"/>
+<xs:element name="estatusLote" type="xs:short"/>
+<xs:element minOccurs="0" name="mensaje" type="xs:string"/>
+<xs:element minOccurs="0" name="excelBase64" type="xs:base64Binary"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="descargaCertificadosResponse">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="numeroLote" type="xs:integer"/>
+<xs:element name="mensaje" type="xs:string"/>
+<xs:element name="certificadosBase64" type="xs:base64Binary"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="cancelarCertificadosResponse">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="codigo" type="xs:int"/>
+<xs:element name="mensaje" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="cancelarLoteCertificadosResponse">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="codigo" type="xs:int"/>
+<xs:element name="mensaje" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="consultaEstatusEscuelaRequest">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="autenticacion" type="ws:autenticacionType"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="consultaEstatusEscuelaResponse">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="codigo" type="xs:int"/>
+<xs:element name="mensaje" type="xs:string"/>
+<xs:element minOccurs="0" name="lista" type="ws:listaType"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="consultaGeneroRequest">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="autenticacion" type="ws:autenticacionType"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="consultaGeneroResponse">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="codigo" type="xs:int"/>
+<xs:element name="mensaje" type="xs:string"/>
+<xs:element minOccurs="0" name="lista" type="ws:listaType"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="consultaGeneroDependenciaRequest">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="autenticacion" type="ws:autenticacionType"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="consultaGeneroDependenciaResponse">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="codigo" type="xs:int"/>
+<xs:element name="mensaje" type="xs:string"/>
+<xs:element minOccurs="0" name="lista" type="ws:listaType"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="consultaGeneroEscuelaRequest">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="autenticacion" type="ws:autenticacionType"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="consultaGeneroEscuelaResponse">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="codigo" type="xs:int"/>
+<xs:element name="mensaje" type="xs:string"/>
+<xs:element minOccurs="0" name="lista" type="ws:listaType"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="consultaModalidadRequest">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="autenticacion" type="ws:autenticacionType"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="consultaModalidadResponse">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="codigo" type="xs:int"/>
+<xs:element name="mensaje" type="xs:string"/>
+<xs:element minOccurs="0" name="lista" type="ws:listaType"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="consultaMotivoAltaRequest">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="autenticacion" type="ws:autenticacionType"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="consultaMotivoAltaResponse">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="codigo" type="xs:int"/>
+<xs:element name="mensaje" type="xs:string"/>
+<xs:element minOccurs="0" name="lista" type="ws:listaType"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="consultaMotivoCancelacionRequest">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="autenticacion" type="ws:autenticacionType"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="consultaMotivoCancelacionResponse">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="codigo" type="xs:int"/>
+<xs:element name="mensaje" type="xs:string"/>
+<xs:element minOccurs="0" name="lista" type="ws:listaType"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="consultaTipoCertificacionRequest">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="autenticacion" type="ws:autenticacionType"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="consultaTipoCertificacionResponse">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="codigo" type="xs:int"/>
+<xs:element name="mensaje" type="xs:string"/>
+<xs:element minOccurs="0" name="lista" type="ws:listaType"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:schema>
+</wsdl:types>
+<wsdl:message name="cargaCertificadosRequest">
+<wsdl:part element="tns:cargaCertificadosRequest" name="cargaCertificadosRequest"/>
+</wsdl:message>
+<wsdl:message name="cargaCertificadosResponse">
+<wsdl:part element="tns:cargaCertificadosResponse" name="cargaCertificadosResponse"/>
+</wsdl:message>
+<wsdl:message name="consultaCertificadosRequest">
+<wsdl:part element="tns:consultaCertificadosRequest" name="consultaCertificadosRequest"/>
+</wsdl:message>
+<wsdl:message name="consultaCertificadosResponse">
+<wsdl:part element="tns:consultaCertificadosResponse" name="consultaCertificadosResponse"/>
+</wsdl:message>
+<wsdl:message name="descargaCertificadosRequest">
+<wsdl:part element="tns:descargaCertificadosRequest" name="descargaCertificadosRequest"/>
+</wsdl:message>
+<wsdl:message name="descargaCertificadosResponse">
+<wsdl:part element="tns:descargaCertificadosResponse" name="descargaCertificadosResponse"/>
+</wsdl:message>
+<wsdl:message name="cancelarCertificadosRequest">
+<wsdl:part element="tns:cancelarCertificadosRequest" name="cancelarCertificadosRequest"/>
+</wsdl:message>
+<wsdl:message name="cancelarCertificadosResponse">
+<wsdl:part element="tns:cancelarCertificadosResponse" name="cancelarCertificadosResponse"/>
+</wsdl:message>
+<wsdl:message name="cancelarLoteCertificadosRequest">
+<wsdl:part element="tns:cancelarLoteCertificadosRequest" name="cancelarLoteCertificadosRequest"/>
+</wsdl:message>
+<wsdl:message name="cancelarLoteCertificadosResponse">
+<wsdl:part element="tns:cancelarLoteCertificadosResponse" name="cancelarLoteCertificadosResponse"/>
+</wsdl:message>
+<wsdl:message name="consultaEstatusEscuelaRequest">
+<wsdl:part element="tns:consultaEstatusEscuelaRequest" name="consultaEstatusEscuelaRequest"/>
+</wsdl:message>
+<wsdl:message name="consultaEstatusEscuelaResponse">
+<wsdl:part element="tns:consultaEstatusEscuelaResponse" name="consultaEstatusEscuelaResponse"/>
+</wsdl:message>
+<wsdl:message name="consultaGeneroRequest">
+<wsdl:part element="tns:consultaGeneroRequest" name="consultaGeneroRequest"/>
+</wsdl:message>
+<wsdl:message name="consultaGeneroResponse">
+<wsdl:part element="tns:consultaGeneroResponse" name="consultaGeneroResponse"/>
+</wsdl:message>
+<wsdl:message name="consultaGeneroDependenciaRequest">
+<wsdl:part element="tns:consultaGeneroDependenciaRequest" name="consultaGeneroDependenciaRequest"/>
+</wsdl:message>
+<wsdl:message name="consultaGeneroDependenciaResponse">
+<wsdl:part element="tns:consultaGeneroDependenciaResponse" name="consultaGeneroDependenciaResponse"/>
+</wsdl:message>
+<wsdl:message name="consultaGeneroEscuelaRequest">
+<wsdl:part element="tns:consultaGeneroEscuelaRequest" name="consultaGeneroEscuelaRequest"/>
+</wsdl:message>
+<wsdl:message name="consultaGeneroEscuelaResponse">
+<wsdl:part element="tns:consultaGeneroEscuelaResponse" name="consultaGeneroEscuelaResponse"/>
+</wsdl:message>
+<wsdl:message name="consultaModalidadRequest">
+<wsdl:part element="tns:consultaModalidadRequest" name="consultaModalidadRequest"/>
+</wsdl:message>
+<wsdl:message name="consultaModalidadResponse">
+<wsdl:part element="tns:consultaModalidadResponse" name="consultaModalidadResponse"/>
+</wsdl:message>
+<wsdl:message name="consultaMotivoAltaRequest">
+<wsdl:part element="tns:consultaMotivoAltaRequest" name="consultaMotivoAltaRequest"/>
+</wsdl:message>
+<wsdl:message name="consultaMotivoAltaResponse">
+<wsdl:part element="tns:consultaMotivoAltaResponse" name="consultaMotivoAltaResponse"/>
+</wsdl:message>
+<wsdl:message name="consultaMotivoCancelacionRequest">
+<wsdl:part element="tns:consultaMotivoCancelacionRequest" name="consultaMotivoCancelacionRequest"/>
+</wsdl:message>
+<wsdl:message name="consultaMotivoCancelacionResponse">
+<wsdl:part element="tns:consultaMotivoCancelacionResponse" name="consultaMotivoCancelacionResponse"/>
+</wsdl:message>
+<wsdl:message name="consultaTipoCertificacionRequest">
+<wsdl:part element="tns:consultaTipoCertificacionRequest" name="consultaTipoCertificacionRequest"/>
+</wsdl:message>
+<wsdl:message name="consultaTipoCertificacionResponse">
+<wsdl:part element="tns:consultaTipoCertificacionResponse" name="consultaTipoCertificacionResponse"/>
+</wsdl:message>
+<wsdl:portType name="CertificadosNormalesPortType">
+<wsdl:operation name="cargaCertificados">
+<wsdl:input message="tns:cargaCertificadosRequest" name="cargaCertificadosRequest"/>
+<wsdl:output message="tns:cargaCertificadosResponse" name="cargaCertificadosResponse"/>
+</wsdl:operation>
+<wsdl:operation name="consultaCertificados">
+<wsdl:input message="tns:consultaCertificadosRequest" name="consultaCertificadosRequest"/>
+<wsdl:output message="tns:consultaCertificadosResponse" name="consultaCertificadosResponse"/>
+</wsdl:operation>
+<wsdl:operation name="descargaCertificados">
+<wsdl:input message="tns:descargaCertificadosRequest" name="descargaCertificadosRequest"/>
+<wsdl:output message="tns:descargaCertificadosResponse" name="descargaCertificadosResponse"/>
+</wsdl:operation>
+<wsdl:operation name="cancelarCertificados">
+<wsdl:input message="tns:cancelarCertificadosRequest" name="cancelarCertificadosRequest"/>
+<wsdl:output message="tns:cancelarCertificadosResponse" name="cancelarCertificadosResponse"/>
+</wsdl:operation>
+<wsdl:operation name="cancelarLoteCertificados">
+<wsdl:input message="tns:cancelarLoteCertificadosRequest" name="cancelarLoteCertificadosRequest"/>
+<wsdl:output message="tns:cancelarLoteCertificadosResponse" name="cancelarLoteCertificadosResponse"/>
+</wsdl:operation>
+<wsdl:operation name="consultaEstatusEscuela">
+<wsdl:input message="tns:consultaEstatusEscuelaRequest" name="consultaEstatusEscuelaRequest"/>
+<wsdl:output message="tns:consultaEstatusEscuelaResponse" name="consultaEstatusEscuelaResponse"/>
+</wsdl:operation>
+<wsdl:operation name="consultaGenero">
+<wsdl:input message="tns:consultaGeneroRequest" name="consultaGeneroRequest"/>
+<wsdl:output message="tns:consultaGeneroResponse" name="consultaGeneroResponse"/>
+</wsdl:operation>
+<wsdl:operation name="consultaGeneroDependencia">
+<wsdl:input message="tns:consultaGeneroDependenciaRequest" name="consultaGeneroDependenciaRequest"/>
+<wsdl:output message="tns:consultaGeneroDependenciaResponse" name="consultaGeneroDependenciaResponse"/>
+</wsdl:operation>
+<wsdl:operation name="consultaGeneroEscuela">
+<wsdl:input message="tns:consultaGeneroEscuelaRequest" name="consultaGeneroEscuelaRequest"/>
+<wsdl:output message="tns:consultaGeneroEscuelaResponse" name="consultaGeneroEscuelaResponse"/>
+</wsdl:operation>
+<wsdl:operation name="consultaModalidad">
+<wsdl:input message="tns:consultaModalidadRequest" name="consultaModalidadRequest"/>
+<wsdl:output message="tns:consultaModalidadResponse" name="consultaModalidadResponse"/>
+</wsdl:operation>
+<wsdl:operation name="consultaMotivoAlta">
+<wsdl:input message="tns:consultaMotivoAltaRequest" name="consultaMotivoAltaRequest"/>
+<wsdl:output message="tns:consultaMotivoAltaResponse" name="consultaMotivoAltaResponse"/>
+</wsdl:operation>
+<wsdl:operation name="consultaMotivoCancelacion">
+<wsdl:input message="tns:consultaMotivoCancelacionRequest" name="consultaMotivoCancelacionRequest"/>
+<wsdl:output message="tns:consultaMotivoCancelacionResponse" name="consultaMotivoCancelacionResponse"/>
+</wsdl:operation>
+<wsdl:operation name="consultaTipoCertificacion">
+<wsdl:input message="tns:consultaTipoCertificacionRequest" name="consultaTipoCertificacionRequest"/>
+<wsdl:output message="tns:consultaTipoCertificacionResponse" name="consultaTipoCertificacionResponse"/>
+</wsdl:operation>
+</wsdl:portType>
+<wsdl:binding name="CertificadosNormalesPortTypeSoap11" type="tns:CertificadosNormalesPortType">
+<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+<wsdl:operation name="cargaCertificados">
+<soap:operation soapAction=""/>
+<wsdl:input name="cargaCertificadosRequest">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="cargaCertificadosResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="consultaCertificados">
+<soap:operation soapAction=""/>
+<wsdl:input name="consultaCertificadosRequest">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="consultaCertificadosResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="descargaCertificados">
+<soap:operation soapAction=""/>
+<wsdl:input name="descargaCertificadosRequest">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="descargaCertificadosResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="cancelarCertificados">
+<soap:operation soapAction=""/>
+<wsdl:input name="cancelarCertificadosRequest">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="cancelarCertificadosResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="cancelarLoteCertificados">
+<soap:operation soapAction=""/>
+<wsdl:input name="cancelarLoteCertificadosRequest">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="cancelarLoteCertificadosResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="consultaEstatusEscuela">
+<soap:operation soapAction=""/>
+<wsdl:input name="consultaEstatusEscuelaRequest">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="consultaEstatusEscuelaResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="consultaGenero">
+<soap:operation soapAction=""/>
+<wsdl:input name="consultaGeneroRequest">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="consultaGeneroResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="consultaGeneroDependencia">
+<soap:operation soapAction=""/>
+<wsdl:input name="consultaGeneroDependenciaRequest">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="consultaGeneroDependenciaResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="consultaGeneroEscuela">
+<soap:operation soapAction=""/>
+<wsdl:input name="consultaGeneroEscuelaRequest">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="consultaGeneroEscuelaResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="consultaModalidad">
+<soap:operation soapAction=""/>
+<wsdl:input name="consultaModalidadRequest">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="consultaModalidadResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="consultaMotivoAlta">
+<soap:operation soapAction=""/>
+<wsdl:input name="consultaMotivoAltaRequest">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="consultaMotivoAltaResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="consultaMotivoCancelacion">
+<soap:operation soapAction=""/>
+<wsdl:input name="consultaMotivoCancelacionRequest">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="consultaMotivoCancelacionResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="consultaTipoCertificacion">
+<soap:operation soapAction=""/>
+<wsdl:input name="consultaTipoCertificacionRequest">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="consultaTipoCertificacionResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+</wsdl:binding>
+<wsdl:service name="CertificadosNormalesPortTypeService">
+<wsdl:port binding="tns:CertificadosNormalesPortTypeSoap11" name="CertificadosNormalesPortTypeSoap11">
+<soap:address location="https://mecqa.siged.sep.gob.mx:443/mec-ws/services/V1/"/>
+</wsdl:port>
+</wsdl:service>
+</wsdl:definitions>
